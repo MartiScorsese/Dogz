@@ -7,10 +7,10 @@ from io import BytesIO
 
 def get_dog_image():
     try:
-        response = requests.get('ttps://dog.ceo/api/breeds/image/random')
+        response = requests.get('https://dog.ceo/api/breeds/image/random')
         response.raise_for_status()
         data = response.json()
-        return data('message')
+        return data['message']
     except Exception as e:
         mb.showerror("Ошибка", f'Возникла ошибка при запросе к API {e}')
         return None
@@ -25,7 +25,7 @@ def show_image():
             img_data = BytesIO(response.content)
             img = Image.open(img_data)
             img.thumbnail((300, 300))
-            Img = ImageTk.PhotoImage(img)
+            img = ImageTk.PhotoImage(img)
             label.config(image=img)
             label.image = img
         except Exception as e:
